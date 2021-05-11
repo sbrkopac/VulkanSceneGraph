@@ -55,6 +55,9 @@ namespace vsg
         /// By default is null so no resize handling is done.
         ref_ptr<WindowResizeHandler> windowResizeHandler;
 
+        /// invoke the WindowResizeHandler, called automatically when window dimension change is detected.
+        void resized();
+
         /// window extent at previous frame, used to track window resizes
         const uint32_t invalid_dimension = std::numeric_limits<uint32_t>::max();
         mutable VkExtent2D previous_extent = VkExtent2D{invalid_dimension, invalid_dimension};
