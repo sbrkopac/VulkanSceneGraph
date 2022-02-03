@@ -27,4 +27,25 @@ jobs:
         cmake .
         make -j 2
         sudo make install
+
+  windows-build:
+    runs-on: windows-2016
+    steps:
+    - name: Setup cmake
+      uses: jwlawson/actions-setup-cmake@v1.9
+      with:
+        cmake-version: ${{env.CMakeVersion}}
+    - uses: actions/checkout@v2
+    - name: Vulkan Install
+      uses: humbletim/setup-vulkan-sdk@v1.0.3
+    - name: CMake
+      run: cmake . -G "Visual Studio 15 2017" -A x64
+      env:
+        VULKAN_SDK: ${{steps.env.outputs.VULKAN_SDK}}
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+    - name: MSBuild Compile
+      run: MSBuild.exe ALL_BUILD.vcxproj -p:Configuration=Release
+    - name: MSBuild Install
+      run: MSBuild.exe INSTALL.vcxproj -p:Configuration=Release
         
