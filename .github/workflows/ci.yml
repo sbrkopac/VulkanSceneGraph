@@ -16,8 +16,6 @@ jobs:
         path: main
     - name: Vulkan Install
       uses: humbletim/setup-vulkan-sdk@v1.0.3
-      with:
-        vulkan-version: ${{env.VULKAN_SDK}}
     - name: VSG Checkout
       uses: actions/checkout@v2
       with:
