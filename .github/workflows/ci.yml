@@ -24,15 +24,7 @@ jobs:
     - name: VSG Build and Install
       run: |
         cd vsg
-        cmake -D Vulkan_INCLUDE_DIR="${{env.VULKAN_SDK}}/include" \
-          -D Vulkan_LIBRARY="${{env.VULKAN_SDK}}/lib/libvulkan.so" .
-        make -j 2
-        sudo make install
-    - name: vsgExamples Build and Install
-      run: |
-        cd main
-        cmake -D Vulkan_INCLUDE_DIR="${{env.VULKAN_SDK}}/include" \
-          -D Vulkan_LIBRARY="${{env.VULKAN_SDK}}/lib/libvulkan.so" .
+        cmake .
         make -j 2
         sudo make install
         
